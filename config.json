@@ -1,0 +1,95 @@
+{
+	"devices": {
+		"Steckdose01": {
+			"protocol": [ "kaku_switch_old" ],
+			"id": [{
+				"id": 21,
+				"unit": 8
+			}],
+			"state": "off"
+		},
+		"Steckdose04": {
+			"protocol": [ "kaku_switch_old" ],
+			"id": [{
+				"id": 23,
+				"unit": 0
+			}],
+			"state": "on"
+		},
+		"Steckdose02": {
+			"protocol": [ "kaku_switch_old" ],
+			"id": [{
+				"id": 19,
+				"unit": 8
+			}],
+			"state": "on"
+		},
+		"Steckdose03": {
+			"protocol": [ "kaku_switch_old" ],
+			"id": [{
+				"id": 22,
+				"unit": 8
+			}],
+			"state": "on"
+		}
+	},
+	"rules": {},
+	"gui": {
+		"Steckdose01": {
+			"name": "Steckdose 1 Strahler",
+			"group": [ "Beleuchtung" ],
+			"media": [ "all" ]
+		},
+		"Steckdose02": {
+			"name": "Steckdose 2 Stern",
+			"group": [ "Beleuchtung" ],
+			"media": [ "all" ]
+		},
+		"Steckdose04": {
+			"name": "Steckdose 4 Stehlampe 3 Birnen",
+			"group": [ "Beleuchtung" ],
+			"media": [ "all" ]
+		}
+	},
+	"settings": {
+		"log-level": 6,
+		"pid-file": "/var/run/pilight.pid",
+		"log-file": "/var/log/pilight.log",
+		"standalone": 0,
+		"webserver-enable": 1,
+		"webserver-root": "/usr/local/share/pilight/webgui",
+		"webserver-http-port": 5001,
+		"webserver-https-port": 5002,
+		"webserver-cache": 1,
+		"whitelist": "",
+		"gpio-platform": "raspberrypi3"
+	},
+	"hardware": {
+		"433gpio": {
+			"sender": 0,
+			"receiver": 1
+		}
+	},
+	"registry": {
+		"webserver": {
+			"ssl": {
+				"certificate": {
+					"location": "/etc/pilight/pilight.pem"
+				}
+			}
+		},
+		"pilight": {
+			"version": {
+				"current": "8.1.5"
+			}
+		},
+		"hardware": {
+			"RF433": {
+				"mingaplen": 4420,
+				"maxgaplen": 72900,
+				"minrawlen": 26,
+				"maxrawlen": 400
+			}
+		}
+	}
+}
