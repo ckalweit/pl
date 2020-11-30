@@ -1,5 +1,70 @@
 {
 	"devices": {
+		"Label_Status_Be": {
+			"protocol": [ "generic_label" ],
+			"id": [{
+				"id": 12
+			}],
+			"label": "sunrise",
+			"color": "Gray"
+		},
+		"outside": {
+			"protocol": [ "sunriseset" ],
+			"id": [{
+				"longitude": 19.34343,
+				"latitude": 42.3434
+			}],
+			"sunrise": 8.07,
+			"sunset": 14.01,
+			"sun": "set"
+		},
+		"time": {
+			"protocol": [ "datetime" ],
+			"id": [{
+				"longitude": 19.53253,
+				"latitude": 37.3535
+			}],
+			"year": 2020,
+			"month": 11,
+			"day": 29,
+			"hour": 18,
+			"minute": 10,
+			"second": 58,
+			"weekday": 1,
+			"dst": 0
+		},
+		"Steckdose04_NEU": {
+			"protocol": [ "quigg_gt1000" ],
+			"id": [{
+				"id": 2,
+				"unit": 0
+			}],
+			"state": "on"
+		},
+		"Steckdose03_NEU": {
+			"protocol": [ "quigg_gt1000" ],
+			"id": [{
+				"id": 2,
+				"unit": 1
+			}],
+			"state": "on"
+		},
+		"Steckdose02_NEU": {
+			"protocol": [ "quigg_gt1000" ],
+			"id": [{
+				"id": 2,
+				"unit": 2
+			}],
+			"state": "off"
+		},
+		"Steckdose01_NEU": {
+			"protocol": [ "quigg_gt1000" ],
+			"id": [{
+				"id": 2,
+				"unit": 3
+			}],
+			"state": "off"
+		},
 		"Steckdose01": {
 			"protocol": [ "kaku_switch_old" ],
 			"id": [{
@@ -33,21 +98,51 @@
 			"state": "on"
 		}
 	},
-	"rules": {},
+	"rules": {
+		"tsunset": {
+			"rule": "IF (DATE_FORMAT(time, %H%M%S) == 225500) AND Steckdose03_NEU.state == on AND time.second == 0 THEN switch DEVICE Steckdose03_NEU AND Steckdose04_NEU TO off",
+			"active": 1
+		},
+		"sunset": {
+			"rule": "IF (outside.sunset == DATE_FORMAT(DATE_ADD(time, '-1 HOUR'), '%Y-%m-%d %H:%M:%S', %H.%M)) AND Steckdose03_NEU.state == off AND time.second == 0 THEN switch DEVICE Steckdose03_NEU AND Steckdose04_NEU TO on",
+			"active": 1
+		}
+	},
 	"gui": {
-		"Steckdose01": {
-			"name": "Steckdose 1 Strahler",
+		"Steckdose01_NEU": {
+			"name": "Steckdose 1 Stehlampe 3 Birnen",
 			"group": [ "Beleuchtung" ],
 			"media": [ "all" ]
 		},
-		"Steckdose02": {
-			"name": "Steckdose 2 Stern",
+		"Steckdose02_NEU": {
+			"name": "Steckdose 2 Strahler",
 			"group": [ "Beleuchtung" ],
 			"media": [ "all" ]
 		},
-		"Steckdose04": {
-			"name": "Steckdose 4 Stehlampe 3 Birnen",
-			"group": [ "Beleuchtung" ],
+		"Label_Status_Be": {
+			"name": "Status Automatik",
+			"group": [ "Weihnachten" ],
+			"media": [ "all" ]
+		},
+		"outside": {
+			"name": "Sunrise / Sunset",
+			"group": [ "Weihnachten" ],
+			"media": [ "all" ]
+		},
+		"time": {
+			"name": "Zeit",
+			"format": "dd DD-MM-YYYY HH:mm:ss",
+			"group": [ "Weihnachten" ],
+			"media": [ "all" ]
+		},
+		"Steckdose03_NEU": {
+			"name": "Steckdose 3 Sterne",
+			"group": [ "Weihnachten" ],
+			"media": [ "all" ]
+		},
+		"Steckdose04_NEU": {
+			"name": "Steckdose 4 Außen",
+			"group": [ "Weihnachten" ],
 			"media": [ "all" ]
 		}
 	},
